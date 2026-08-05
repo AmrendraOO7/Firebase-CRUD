@@ -108,12 +108,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAEMNGe8ONxOdIcD-OeZO4MCLUMhlnHA18",
-    authDomain: "bca-4th.firebaseapp.com",
-    projectId: "bca-4th",
-    storageBucket: "bca-4th.firebasestorage.app",
-    messagingSenderId: "661834999211",
-    appId: "1:661834999211:web:6022a2d50b4388b50b5eee"
+    // ADD YOUR FIREBASE CONFIGURATION HERE
 };
 
 const app = initializeApp(firebaseConfig);
