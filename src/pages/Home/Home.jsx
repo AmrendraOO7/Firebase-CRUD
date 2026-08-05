@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import { useAuth } from '../context/AuthContext'
-import './auth.css'
+import { useAuth } from '../../context/AuthContext'
+import './Home.css'
 
 function Home() {
   const { currentUser, logout } = useAuth()

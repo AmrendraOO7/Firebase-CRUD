@@ -1,38 +1,28 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import { useAuth } from '../context/AuthContext'
-import { getAuthErrorMessage } from '../utils/authErrors'
-import './auth.css'
+import { useAuth } from '../../context/AuthContext'
+import { getAuthErrorMessage } from '../../utils/authErrors'
+import './Login.css'
 
-function Signup() {
-  const [name, setName] = useState('')
+function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [submitting, setSubmitting] = useState(false)
-  const { signup } = useAuth()
+  const { login } = useAuth()
   const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!name || !email || !password || !confirmPassword) {
+    if (!email || !password) {
       toast.error('Please fill in all fields.')
-      return
-    }
-    if (password.length < 6) {
-      toast.error('Password should be at least 6 characters.')
-      return
-    }
-    if (password !== confirmPassword) {
-      toast.error('Passwords do not match.')
       return
     }
     setSubmitting(true)
     try {
-      await signup(email.trim(), password)
-      toast.success('Account created successfully!')
+      await login(email.trim(), password)
+      toast.success('Logged in successfully!')
       navigate('/')
     } catch (error) {
       toast.error(getAuthErrorMessage(error.code))
@@ -44,23 +34,10 @@ function Signup() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">Create an account</h1>
-        <p className="auth-subtitle">Sign up to get started</p>
+        <h1 className="auth-title">Welcome back</h1>
+        <p className="auth-subtitle">Log in to continue to your account</p>
 
         <form onSubmit={handleSubmit} className="auth-form" noValidate>
-          <div className="form-group">
-            <label htmlFor="name">Full name</label>
-            <input
-              id="name"
-              type="text"
-              placeholder="John Doe"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              autoComplete="name"
-              required
-            />
-          </div>
-
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -80,10 +57,10 @@ function Signup() {
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
-                placeholder="At least 6 characters"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
+                autoComplete="current-password"
                 required
               />
               <button
@@ -97,30 +74,17 @@ function Signup() {
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="confirm-password">Confirm password</label>
-            <input
-              id="confirm-password"
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Re-enter your password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              autoComplete="new-password"
-              required
-            />
-          </div>
-
           <button type="submit" className="auth-button" disabled={submitting}>
-            {submitting ? 'Creating account...' : 'Sign up'}
+            {submitting ? 'Logging in...' : 'Log in'}
           </button>
         </form>
 
         <p className="auth-switch">
-          Already have an account? <Link to="/login">Log in</Link>
+          Don&apos;t have an account? <Link to="/signup">Sign up</Link>
         </p>
       </div>
     </div>
   )
 }
 
-export default Signup
+export default Login

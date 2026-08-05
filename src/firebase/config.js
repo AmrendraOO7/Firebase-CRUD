@@ -14,3 +14,6 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export default app;
+
+
+//Rename config.js to firebase.js and add your Firebase configuration details in the firebaseConfig object.

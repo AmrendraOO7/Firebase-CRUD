@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider, useAuth } from './context/AuthContext'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import Home from './pages/Home'
+import Login from './pages/Login/Login'
+import Signup from './pages/Signup/Signup'
+import Home from './pages/Home/Home'
 
 function ProtectedRoute({ children }) {
   const { currentUser, loading } = useAuth()
