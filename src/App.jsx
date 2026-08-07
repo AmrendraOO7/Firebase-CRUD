@@ -17,6 +17,14 @@ function ProtectedRoute({ children }) {
   return children
 }
 
+// function ProtectedAdminRoute({ children }) {
+//   const { currentUser, loading } = useAuth()
+//   if (loading) return null
+//   if (!currentUser) return <Navigate to="/login" replace />
+//   if (currentUser.role !== 'admin') return <Navigate to="/" replace />
+//   return children
+// }
+
 function GuestRoute({ children }) {
   const { currentUser, loading } = useAuth()
   if (loading) return null
